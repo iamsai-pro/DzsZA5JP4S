@@ -1,0 +1,130 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #0f0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#terminal {
+  width: 80%;
+  max-width: 800px;
+  height: 70vh;
+  max-height: 600px;
+  background-color: #0a0a0a;
+  border: 1px solid #0f0;
+  box-shadow: 0 0 15px #0f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+#terminal-header {
+  background-color: #222;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #0f0;
+}
+
+#terminal-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.close, .minimize, .maximize {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.close { background-color: #ff5f56; border: 1px solid #e04740; }
+.minimize { background-color: #ffbd2e; border: 1px solid #d9a02a; }
+.maximize { background-color: #27c93f; border: 1px solid #12b42e; }
+
+#terminal-title {
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+#terminal-body {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  position: relative;
+}
+
+#output {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.output-line {
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.command {
+  color: #fff;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+#input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: #0f0;
+}
+
+#prompt {
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+#command-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: #0f0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 1em;
+  outline: none;
+  caret-color: #0f0;
+}
+
+#cursor {
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #terminal {
+    width: 95%;
+    height: 80vh;
+    font-size: 12px;
+  }
+  #terminal-body {
+    padding: 10px;
+  }
+  #prompt {
+    font-size: 0.9em;
+  }
+  #command-input {
+    font-size: 0.9em;
+  }
+}

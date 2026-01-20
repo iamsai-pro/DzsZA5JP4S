@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terminal Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TERMINAL WINDOW -->
+  <div id="terminal">
+    <div id="terminal-header">
+      <div id="terminal-buttons">
+        <span class="close"></span>
+        <span class="minimize"></span>
+        <span class="maximize"></span>
+      </div>
+      <span id="terminal-title">user@portfolio:~$</span>
+    </div>
+    <div id="terminal-body">
+      <div id="output"></div>
+      <div id="input-line">
+        <span id="prompt">user@portfolio:~$</span>
+        <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
+        <span id="cursor">_</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const outputDiv = document.getElementById('output');
+    const commandInput = document.getElementById('command-input');
+    const promptSpan = document.getElementById('prompt');
+    const cursorSpan = document.getElementById('cursor');
+
+    const commands = {
+      'whoami': () => {
+        printLine("PABOLU VENKATA SUBRAHMANYA DHEERAJ");
+        printLine("CARRIER OBJECTIVE");
+        printLine("Work for an organization that provides me the opportunity to improve my skills and knowledge to grow along with the organization’s objective.");
+      },
+      'education': () => {
+        printLine("Bachelor of Engineering, Computer Science and Engineering");
+        printLine("R . M . D E n g i n e e r i n g C o l l e g e , C h e n n a i 2022 - 2026");
+        printLine("C G P A : 7 . 7 0 *");
+        printLine("");
+        printLine("Higher Secondary School");
+        printLine("N a r a y a n a J r . c o l l e g e , N e l l o r e 2020 - 2022");
+        printLine("P e r c e n t a g e : 9 2 . 6");
+        printLine("");
+        printLine("Secondary Education");
+        printLine("V i v e k a n a n d a H . S 2020");
+        printLine("P e r c e n t a g e : 7 6 . 1 7");
+      },
+      'skills': () => {
+        printLine("TECHNICAL STRENGTHS");
+        printLine("Programming Languages: Python 3, Java");
+        printLine("Frameworks: Flask, Spring Boot, React js");
+        printLine("Web Technologies: HTML, CSS, Tailwindcss");
+        printLine("Database: Structured Query Language (SQL)");
+        printLine("Web Tools: Github, Git");
+      },
+      'projects': () => {
+        printLine("Full-Stack Firebase User Portfolio System");
+        printLine("Developed user authentication, profile management, and file upload features using Firebase Authentication, Realtime Database & Storage.");
+        printLine("Built a clean and responsive UI using HTML and CSS to ensure user-friendly interface.");
+        printLine("Created an admin dashboard in Flask to manage user lifecycle (CRUD operations), leading to clean and structured data handling.");
+        printLine("");
+        printLine("Representation and Symbols of Nucleotide Sequence Data");
+        printLine("Developed a tool that converts any input text into a DNA-base sequence (A, C, G, T) and displays the output in four distinct colours.");
+        printLine("");
+        printLine("Resume to Portfolio Generator");
+        printLine("Built a full-stack application using React (Vite) and Flask that converts resume PDFs into AI-generated, responsive portfolio websites.");
+        printLine("Automated deployment by integrating GitHub APIs to create repositories, upload HTML/CSS files, and deliver a live GitHub Pages link within seconds.");
+      },
+      'certifications': () => {
+        printLine("DATA BASE MANAGEMENT SYSTEM - NPTEL");
+        printLine("Responsive Web Design - freeCodeCamp");
+      },
+      'contact': () => {
+        printLine("B-11-582, Chennuru road, Buchi reddy palem");
+        printLine("(+91)7032671918");
+        printLine("subrahmanyadheeraj1918@gmail.com");
+        printLine("https://dheeraj1918.github.io/portfolio/");
+        printLine("Github: https://github.com/dheeraj1918");
+      },
+      'help': () => {
+        printLine("Available commands:");
+        for (const cmd in commands) {
+          printLine(`- ${cmd}`);
+        }
+      }
+    };
+
+    function printLine(text = '', isCommand = false) {
+      const line = document.createElement('div');
+      if (isCommand) {
+        line.classList.add('command');
+        line.textContent = text;
+      } else {
+        line.classList.add('output-line');
+        line.innerHTML = text.replace(/ /g, '&nbsp;'); // Preserve spaces
+      }
+      outputDiv.appendChild(line);
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+
+    function executeCommand(command) {
+      const trimmedCommand = command.trim().toLowerCase();
+      printLine(command, true); // Echo command
+
+      if (commands[trimmedCommand]) {
+        commands[trimmedCommand]();
+      } else if (trimmedCommand === '') {
+        // Do nothing for empty command
+      } else {
+        printLine(`command not found: ${command}`);
+      }
+      commandInput.value = '';
+      updatePrompt();
+      scrollToBottom();
+    }
+
+    commandInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeCommand(commandInput.value);
+      }
+    });
+
+    const blinkCursor = () => {
+      cursorSpan.style.opacity = cursorSpan.style.opacity === '0' ? '1' : '0';
+    };
+    setInterval(blinkCursor, 500);
+
+    function updatePrompt() {
+      promptSpan.textContent = `user@portfolio:~$`;
+    }
+
+    function scrollToBottom() {
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+
+    // Initialize
+    printLine("Welcome to PABOLU VENKATA SUBRAHMANYA DHEERAJ's portfolio.");
+    printLine("Type 'help' for a list of available commands.");
+    updatePrompt();
+    commandInput.focus();
+    scrollToBottom();
+
+  </script>
+
+</body>
+</html>
